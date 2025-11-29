@@ -2,21 +2,22 @@ package collectors_grouping.task_018;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.OptionalDouble;
+import java.util.stream.Collectors;
 
 public class Main {
     static void main() {
-        List<Integer> numbers = Arrays.asList(10, 5, 3, 7, 2, 10, 5, 8, 9, 0, -3, 4);
-//  Calculate the average of a list of doubles
-        IO.println("the average of a list of doubles: " + calculateAverage(numbers));
+        List<String> names = Arrays.asList("Ali", "Mona", "Ahmed", "Sara", "Amr", "Laila", "Kareem", "Nada", "Nour", "Samy", "", null);
+//  Create a comma-separated string from a list of strings
 
+        String result = names.stream()
+                .filter(Objects::nonNull)
+                .filter(s -> !s.isEmpty())
+                .collect(Collectors.joining(", "));
 
-    }
+        System.out.println(result);
 
-    public static OptionalDouble calculateAverage(List<Integer> numbers) {
-        return numbers.stream()
-                .mapToDouble(Integer::doubleValue)
-                .average();
     }
 
 }

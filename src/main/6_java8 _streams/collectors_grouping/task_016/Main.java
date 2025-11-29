@@ -2,19 +2,30 @@ package collectors_grouping.task_016;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Main {
     static void main() {
-        List<Integer> numbers = Arrays.asList(10, 5, 3, 7, 2, 10, 5, 8, 9, 0, -3, 4);
-//  Calculate the sum of a list of integers using reduce
-        IO.println("sum: " + sumList(numbers));
+        List<Student> students = Arrays.asList(
+                new Student("Ali", "IT", 85),
+                new Student("Mona", "CS", 92),
+                new Student("Ahmed", "IT", 60),
+                new Student("Sara", "CS", 70),
+                new Student("Omar", "IS", 45),
+                new Student("Laila", "IS", 78)
+        );
+//   Group a list of students by their department
+        Map<String, List<Student>> grouped = students.stream()
+                .collect(Collectors
+                .groupingBy(Student::getDepartment));
+
+        grouped.forEach((dept, list) -> {
+            System.out.println("Department: " + dept);
+            list.forEach(s -> System.out.println(" - " + s.getName() + " (" + s.getGrade() + ")"));
+        });
 
 
-    }
-
-    public static  int sumList(List<Integer> numbers) {
-        return numbers.stream()
-                .reduce(0, Integer::sum);
     }
 
 }
