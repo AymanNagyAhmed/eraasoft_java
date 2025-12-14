@@ -1,0 +1,1 @@
+ALTER TABLE hr.manager READ ONLY;
